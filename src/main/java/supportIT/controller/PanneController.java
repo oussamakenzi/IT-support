@@ -6,7 +6,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import supportIT.model.Panne;
+import supportIT.model.Personne;
 import supportIT.service.implimentation.PanneService;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/admin/gestion-panne")
@@ -23,6 +26,11 @@ public class PanneController {
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("not created" + e.getMessage());
         }
+    }
+
+    @GetMapping("/")
+    public List<Panne> getAllPannes() {
+        return panneService.getAllPannes();
     }
 
     @GetMapping("/idPanne")

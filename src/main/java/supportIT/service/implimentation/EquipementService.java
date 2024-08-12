@@ -1,13 +1,17 @@
 package supportIT.service.implimentation;
 
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import supportIT.enums.StatusEquipement;
 import supportIT.model.Equipement;
+import supportIT.model.Ticket;
 import supportIT.model.Utilisateur;
 import supportIT.repository.EquipementRepository;
+import supportIT.repository.TicketRepository;
 import supportIT.repository.UtilisateurRepository;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
@@ -18,6 +22,9 @@ public class EquipementService {
 
     @Autowired
     private UtilisateurRepository utilisateurRepository;
+
+    @Autowired
+    private TicketRepository ticketRepository;
 
     public void addEquipement(Equipement equipement){
         equipement.setStatus(StatusEquipement.DISPONIBLE);
@@ -68,9 +75,17 @@ public class EquipementService {
 
     }
 
+    @Transactional
+    public List<Ticket> getPannesEquipement(int idEquipement){
+        Equipement equipment = equipementRepository
+                .findById(idEquipement)
+                .orElseThrow(()-> new RuntimeException("equipement not found"));
+
+        return ticketRepository.findByEquipementOrderByDateCreationDesc(equipment);
+    }
 
 
-
-
-
+    public List<Equipement> getAllEquipements() {
+        return equipementRepository.findAll();
+    }
 }

@@ -3,10 +3,7 @@ package supportIT.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import supportIT.auth.AuthenticationRequest;
 import supportIT.auth.AuthenticationResponse;
 import supportIT.service.implimentation.AuthenticationService;
@@ -15,6 +12,7 @@ import supportIT.enums.Role;
 
 @RestController
 @RequestMapping("/auth")
+@CrossOrigin(origins = "http://localhost:4200/")
 @RequiredArgsConstructor
 public class AuthenticationController {
 
@@ -27,7 +25,7 @@ public class AuthenticationController {
         return ResponseEntity.ok(authenticationService.register(request, Role.USER));
     }
 
-    @PostMapping("/register-technicein")
+    @PostMapping("/register-technicien")
     public ResponseEntity<AuthenticationResponse> registerTechnician
             (@RequestBody RegisterRequest request){
         return ResponseEntity.ok(authenticationService.register(request, Role.TECHNICIEN));

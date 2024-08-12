@@ -8,7 +8,9 @@ import lombok.NoArgsConstructor;
 import supportIT.enums.StatusEquipement;
 import supportIT.enums.TypeEquipement;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -34,10 +36,13 @@ public class Equipement {
     private TypeEquipement type;
 
     @Column(name = "dateAchetee", nullable = false)
-    private LocalDateTime dateAchetee;
+    private LocalDate dateAchetee;
 
     @ManyToOne
     @JoinColumn(name = "id_utilisateur")
     private Utilisateur utilisateur;
+
+    @OneToMany(mappedBy = "equipement", cascade = CascadeType.ALL)
+    private List<Ticket> tickets;
 
 }

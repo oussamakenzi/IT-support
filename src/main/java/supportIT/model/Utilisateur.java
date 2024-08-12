@@ -12,4 +12,7 @@ public class Utilisateur extends Personne{
 
     @OneToMany(mappedBy = "utilisateur", cascade = CascadeType.ALL)
     private List<Equipement> equipements;
+
+    @OneToMany(mappedBy = "utilisateur", cascade = CascadeType.ALL)
+    private List<Ticket> tickets;
 }

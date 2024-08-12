@@ -6,8 +6,10 @@ import org.springframework.stereotype.Service;
 import supportIT.enums.StatusEquipement;
 import supportIT.model.Equipement;
 import supportIT.model.Panne;
+import supportIT.model.Personne;
 import supportIT.repository.PanneRepository;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
@@ -19,6 +21,7 @@ public class PanneService {
     public void addPanne(Panne panne){
         panneRepository.save(panne);
     }
+
 
     public Panne getPanne(Integer idPanne) {
 
@@ -47,4 +50,7 @@ public class PanneService {
         panneRepository.delete(panneSupprime);
     }
 
+    public List<Panne> getAllPannes() {
+        return panneRepository.findAll();
+    }
 }
