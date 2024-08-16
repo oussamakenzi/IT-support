@@ -17,14 +17,20 @@ import java.util.NoSuchElementException;
 @Service
 public class EquipementService {
 
-    @Autowired
+
     private EquipementRepository equipementRepository;
 
-    @Autowired
+
     private UtilisateurRepository utilisateurRepository;
 
-    @Autowired
+
     private TicketRepository ticketRepository;
+
+    public EquipementService(EquipementRepository equipementRepository, UtilisateurRepository utilisateurRepository, TicketRepository ticketRepository) {
+        this.equipementRepository = equipementRepository;
+        this.utilisateurRepository = utilisateurRepository;
+        this.ticketRepository = ticketRepository;
+    }
 
     public void addEquipement(Equipement equipement){
         equipement.setStatus(StatusEquipement.DISPONIBLE);

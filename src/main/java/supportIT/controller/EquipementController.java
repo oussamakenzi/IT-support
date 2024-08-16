@@ -17,8 +17,12 @@ import java.util.List;
 @RequestMapping("/admin/gestion-equipement")
 public class EquipementController {
 
-    @Autowired
+
     private EquipementService equipementService;
+
+    public EquipementController(EquipementService equipementService) {
+        this.equipementService = equipementService;
+    }
 
     @PostMapping("/add")
     public ResponseEntity<String> ajouterEquipement(@RequestBody Equipement equipement){
